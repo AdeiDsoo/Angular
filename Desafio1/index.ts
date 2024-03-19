@@ -26,25 +26,64 @@ let numeroYLetras: (string | number)[] = ["josue", 45, "adios"];
 
 // let usuarios=[{nombre:"naruto"}, {nombre:"sasuke"}]
 // {nombre:string}[]
+enum Roles {
+	Administrador = "admin",
+	Usuario = "user",
+}
 
-interface Usuario {
+interface IUsuario {
 	nombre: string;
-    edad:number
-}
-let usuarios: Usuario[] = [
-	{ nombre: "naruto", edad:13 },
-	{ nombre: "sasuke", edad:13 },
-	{ nombre:"Saoho",  edad: 20 },
-];
-
-enum Roles{
-    Administrador="admin",
-    Usuario="user"
+	edad: number;
+    role: Roles;
+    iniciarSesion:()=>void
 }
 
-function validateIsAdmin (role:string){
-    //  return role === "Admin";//no usar directo los estrings
-    return role=== Roles.Administrador
+class Usuario {
+	public nombre: string;
+	private edad: number;
+	role: Roles;
+
+	constructor(nombre: string, edad?: number, role: Roles= Roles.Usuario) {
+		this.nombre = nombre;
+		this.edad = edad || 18;
+		this.role = role;
+	}
+
+	iniciarSesion() {
+		console.log("sesion Iniciada");
+	}
+	cerrarSesion() {
+		console.log("sesion Cerrada");
+	}
+}
+
+const spiderman= new Usuario('Peter Parker', 15, Roles.Administrador)
+const superman = new Usuario("Clark Ken", 20, Roles.Usuario);
+
+
+let usuarios:Usuario[]=[
+    spiderman,
+    superman
+]
+// spiderman.cerrarSesion()
+
+// let usuarios: Usuario[] = [
+// 	{ nombre: "naruto", edad: 13 },
+// 	{ nombre: "sasuke", edad: 13 },
+// 	{ nombre: "Saoho", edad: 20 },
+// ];
+
+
+
+function validateIsAdmin(role: string) {
+	//  return role === "Admin";//no usar directo los estrings
+	return role === Roles.Administrador;
 }
 
 // enum se puede usar como tipo de dato
+//¡¡Revisar mas eso de enum vs obj
+
+let nombreEdad: (string | number)[] = ["sakura", 13];
+//TUPLE
+//duplas para el orden de los datos no poder poner el numero antes que el string etcpor oden
+let nombreEdad2: [string, number] = ["sakura", 13];
